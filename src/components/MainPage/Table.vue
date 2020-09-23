@@ -4,29 +4,21 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
+          <th scope="col">Name</th>
+          <th scope="col">Total cases</th>
+          <th scope="col">Total deaths</th>
+          <th scope="col">Total serious cases</th>
+          <th scope="col">Total recovered</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
+        <tr v-for="(country, index) in countries" :key="index">
+          <th scope="row">{{ country.ourid }}</th>
+          <td>{{ country.title }}</td>
+          <td>{{ country.total_cases }}</td>
+          <td>{{ country.total_deaths }}</td>
+          <td>{{ country.total_serious_cases }}</td>
+          <td>{{ country.total_recovered }}</td>
         </tr>
       </tbody>
     </table>
@@ -42,8 +34,9 @@ export default {
     axios
       .get("https://api.thevirustracker.com/free-api?countryTotals=ALL")
       .then(res => {
-        console.log(Object.values(res.data.countryitems[0]));
         this.countries = Object.values(res.data.countryitems[0]);
+        this.countries.pop();
+        console.log(this.countries);
       })
       .catch(err => {
         console.log(err);
