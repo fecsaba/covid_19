@@ -20,7 +20,19 @@
 export default {
   name: "Card",
   props: {
-    countryName: { type: String, default: null, required: false }
+    countryName: { type: String, default: null, required: false },
+    detailsObj: { type: Object, default: null, required: false }
+  },
+  mounted() {
+    this.anim();
+  },
+  methods: {
+    anim() {
+      // const days = Object.keys(this.detailsObj).length - 2;
+      const valueArr = Object.values(this.detailsObj);
+      valueArr.pop();
+      console.log(valueArr);
+    }
   }
 };
 </script>
